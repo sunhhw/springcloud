@@ -20,10 +20,18 @@ public class UserController {
     private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/{id}")
-    public Object getUser(@PathVariable Long id) {
-        String msg = "This is {id}" + id;
+    public String getUser(@PathVariable Long id) {
+        String msg = "This is getUser " + id;
         return msg;
     }
+
+    @GetMapping("/hello")
+    public String hello() {
+        //LOGGER.info("负载均衡===8201");
+        LOGGER.info("负载均衡===8202");
+        return "Hello1";
+    }
+
 
     @GetMapping("/getUserByIds")
     public Object getUserByIds(@RequestParam List<Long> ids) {

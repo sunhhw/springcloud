@@ -1,11 +1,10 @@
 package com.shw.cloud.controller;
 
+import com.shw.cloud.service.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 /**
  * @author shw
@@ -22,9 +21,17 @@ public class UserRibbonController {
     @Value("${service-url.user-service}")
     private String userServiceUrl;
 
+    @Autowired
+    private ServiceImpl service;
+
     @GetMapping("/{id}")
-    public Object getUser(@PathVariable Long id) {
-        return restTemplate.getForObject(userServiceUrl + "/user/{1}",Object.class, id);
+    public String getUser(@PathVariable Long id) {
+        return restTemplate.getForObject(userServiceUrl + "/user/{1}", String.class, id);
+    }
+
+    @GetMapping("/hi")
+    public String getHi() {
+        return service.getHi();
     }
 
     @GetMapping("/getByUsername")
