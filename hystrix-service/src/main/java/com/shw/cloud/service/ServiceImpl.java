@@ -1,11 +1,12 @@
 package com.shw.cloud.service;
 
-import cn.hutool.http.HttpUtil;
+
+
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -29,7 +30,7 @@ public class ServiceImpl {
      *
      * @return
      */
-    //@HystrixCommand(fallbackMethod = "getDefaultUser")
+    @HystrixCommand(fallbackMethod = "getDefaultUser")
     public String getUser(Long id) {
         String forObject = restTemplate.getForObject(userServiceUrl + "/user/{1}", String.class, id);
         return forObject;
